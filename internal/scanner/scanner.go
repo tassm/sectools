@@ -45,7 +45,7 @@ func getPorts(portsRange string) ([]int, error) {
 }
 
 /*
-*	Main function
+*	TCP scanner entry point
  */
 func Main(address, portRange string) error {
 	ports := make(chan int, 100)
