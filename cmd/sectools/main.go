@@ -4,7 +4,10 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"strconv"
+
+	"github.com/TasSM/sectools/internal/shell"
+
+	"github.com/TasSM/sectools/internal/util"
 
 	"github.com/TasSM/sectools/internal/proxy"
 	"github.com/TasSM/sectools/internal/scanner"
@@ -28,11 +31,14 @@ func main() {
 		if len(argv) != 3 {
 			fmt.Printf("Invalid arguments for proxy - refer to usage")
 		}
-		port, err := strconv.Atoi(argv[2])
-		if err != nil || port > 65535 || port < 0 {
-			log.Fatalln("Invalid local port specified for proxy")
-		}
+		port := util.ValidatePort(argv[2])
 		proxy.Main(argv[1], port)
+	case "shell":
+		if len(argv) != 2 {
+			fmt.Printf("Invalid arguments for remote shell - refer to usage")
+		}
+		port := util.ValidatePort(argv[1])
+		shell.Main(port)
 	}
 	os.Exit(0)
 }

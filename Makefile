@@ -1,4 +1,4 @@
-.PHONY: run-scanner
+.PHONY: run build
 
 run: 
 	go run -race ./cmd/sectools/main.go
